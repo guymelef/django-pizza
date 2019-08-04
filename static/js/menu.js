@@ -168,11 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
         data: data,
         dataType: 'json',
         success: function (data) {
+          let zeroCartDiv = document.querySelector('#zero-cart');
+          let cartItemsDiv = document.querySelector('#cart-items-div');
           if (data.error) {
             alert("Please refresh the page and fix your order.");
           } else {
-            if (document.querySelector('#zero-cart')) {
-              document.querySelector('#zero-cart').style.display = "none";
+            if (zeroCartDiv) {
+              zeroCartDiv.style.display = "none";
             }
             document.querySelector('#checkout-btn').disabled = false;
             document.querySelector('#cart-header').innerHTML = "<i class='fas fa-2x fa-cart-arrow-down text-success'></i><br>Ooh, smells delicious in here!";
@@ -183,7 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
             $('#menuModal').modal('hide');
-            document.quertSelector('.fa-cart-arrow-down').style.animationPlayState = 'running';
+            document.querySelector('.fa-cart-arrow-down').style.animationPlayState = 'running';
+            scrollToBottom(cartItemsDiv);
+            
           }
         }
       });
@@ -290,10 +294,14 @@ function getFormData() {
   return data;
 }
 
+function scrollToBottom(div) {
+  div.scrollTop = div.scrollHeight;
+};
+
 function cleanupCart() {
   document.querySelector('#cart-total').innerHTML = "";
   document.querySelector('#cart-header').innerHTML = "This space looks desolate. <br> Where's the food? ಥ_ಥ";
-  document.querySelector('#cartItems').innerHTML = '<div class="text-center" id="zero-cart"> <i class="fas fa-shopping-cart fa-3x mt-4 text-secondary"></i> <br> <small class="font-weight-bold text-white"> Your order goes here. </small> </div>';
+  document.querySelector('#cartItems').innerHTML = '<div class="text-center" id="zero-cart"><i class="fas fa-shopping-cart fa-3x mt-4 text-secondary"></i> <br> <small class="font-weight-bold text-white">Add your orders here!</small></div>';
   document.querySelector('#checkout-btn').disabled = true;
   document.querySelector('.fa-shopping-cart').style.animationPlayState = 'running';
 }

@@ -45,7 +45,7 @@ li {
 
 .fa-cart-arrow-down {
   animation-name: bounce;
-  animation-duration: 1.3s;
+  animation-duration: 1.2s;
 }
 
 @keyframes contract {
@@ -59,7 +59,7 @@ li {
 
 .fa-shopping-cart {
   animation-name: contract;
-  animation-duration: 1s;
+  animation-duration: 1.2s;
 }
 
 mark {
@@ -94,4 +94,27 @@ td>div>label:hover {
 
 .w-55 {
   width: 55%;
+}
+
+#cart-items-card {
+  background: rgba(15, 15, 15, 0.822);
+}
+
+#cart-items-div {
+  max-width: 336px; 
+  max-height:368px;
+  min-height: 200px;
+}
+
+#cart-items-div::-webkit-scrollbar {
+  width: 5px;
+}
+#cart-items-div::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 95%, 0);
+}
+#cart-items-div::-webkit-scrollbar-thumb {
+  background: rgba(0, 161, 21, 0.452);
+}
+#cart-items-div::-webkit-scrollbar-thumb:hover {
+  background: rgba(1, 146, 20, 0.795); 
 }

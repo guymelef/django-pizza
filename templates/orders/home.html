@@ -145,8 +145,8 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="container">
-              <div class="card bg-dark border border-dark rounded-0 shadow-sm mb-3 rounded-0">
+            <div class="container position-fixed" style="max-width: 23rem;">
+              <div class="card border border-dark rounded-0 shadow-sm mb-3 rounded-0" id="cart-items-card">
                 <div class="card-header border-success text-white text-center pb-0">
                   <h6 class="font-weight-bold" id="cart-header">
                     {% if cart_items %}
@@ -160,7 +160,7 @@
                       Where's the food? ಥ_ಥ
                     {% endif %}
                 </div>
-                <div class="card-body text-white pl-0 pr-0 pb-0 pt-1">
+                <div class="card-body text-white pl-0 pr-0 pb-0 pt-1 overflow-auto" id="cart-items-div">
                   <table class="table table-sm text-white table-borderless table-striped">
                     <tbody id="cartItems">
                       {% if cart_items %}
@@ -170,7 +170,7 @@
                           <td>
                             {{ item.name}}
                             {% if item.size %}
-                              <span class="badge badge-secondary p-1 rounded-0">{{ item.size }}</span>
+                              <span class="badge badge-secondary rounded-0">{{ item.size }}</span>
                             {% endif %}
                             {% if item.extras %}
                               <br>
@@ -190,7 +190,7 @@
                           <i class="fas fa-shopping-cart fa-3x mt-4 text-secondary"></i>
                           <br>
                           <small class="font-weight-bold text-white">
-                            Your order goes here.
+                            Add your orders here!
                           </small>
                         </div>
                       {% endif %}
