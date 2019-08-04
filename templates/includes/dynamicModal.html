@@ -7,7 +7,7 @@
 {{dinnerPlatter|json_script:"dinnerPlatter-items"}}
 
     <script id="modalContent" type="text/template">
-      <form id="menuModalForm" name="{%verbatim%}{{menuType}}{%endverbatim%}" onkeydown="return event.key !== 'Enter';" action="{% url 'cart' %}">
+      <form id="menuModalForm" name="{%verbatim%}{{menuType}}{%endverbatim%}" onkeydown="return event.key !== 'Enter';" action="{% url 'addorder' %}">
         {% csrf_token %}
         <div id="menuQuantity">
           <h5 class="font-weight-bold"><u>Quantity</u>:</h5>

@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse, JsonResponse, Http404
@@ -43,7 +42,7 @@ def home(request):
 
     return render(request, "orders/home.html", context)
 
-def cart(request):
+def addorder(request):
     if request.is_ajax():
 
         # Store orders to session before saving to db
@@ -217,7 +216,6 @@ def cart(request):
 
         print(newOrder)
         return JsonResponse(newOrder)
-
     else:
         raise Http404
 

@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#menuModalForm').onsubmit = () => {
       let data = getFormData();
       $.ajax({
-        url: 'cart/',
+        url: 'cart/addorder/',
         type: 'GET',
         data: data,
         dataType: 'json',
@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
             $('#menuModal').modal('hide');
+            document.quertSelector('.fa-cart-arrow-down').style.animationPlayState = 'running';
           }
         }
       });
@@ -289,6 +290,14 @@ function getFormData() {
   return data;
 }
 
+function cleanupCart() {
+  document.querySelector('#cart-total').innerHTML = "";
+  document.querySelector('#cart-header').innerHTML = "This space looks desolate. <br> Where's the food? ಥ_ಥ";
+  document.querySelector('#cartItems').innerHTML = '<div class="text-center" id="zero-cart"> <i class="fas fa-shopping-cart fa-3x mt-4 text-secondary"></i> <br> <small class="font-weight-bold text-white"> Your order goes here. </small> </div>';
+  document.querySelector('#checkout-btn').disabled = true;
+  document.querySelector('.fa-shopping-cart').style.animationPlayState = 'running';
+}
+
 function deleteOrder(order) {
   const order_id = order.parentElement.parentElement.dataset.orderid;
   const data = {'order_id' : order_id};
@@ -302,7 +311,7 @@ function deleteOrder(order) {
     }
   });
   $.ajax({
-    url: 'deleteorder/',
+    url: 'cart/deleteorder/',
     type: 'POST',
     data: data,
     dataType: 'json',
@@ -318,13 +327,6 @@ function deleteOrder(order) {
       }
     }
   })
-}
-
-function cleanupCart() {
-  document.querySelector('#cart-total').innerHTML = "";
-  document.querySelector('#cart-header').innerHTML = "Your cart looks desolate. <br> Where's the food? :(";
-  document.querySelector('#cartItems').innerHTML = '<div class="text-center" id="zero-cart"> <i class="fas fa-shopping-cart fa-2x mt-4 text-secondary"></i> <br> <small class="font-weight-bold text-white"> Your order goes here. </small> </div>';
-  document.querySelector('#checkout-btn').disabled = true;
 }
 
 function getCookie(name) {
