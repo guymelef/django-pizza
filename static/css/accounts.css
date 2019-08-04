@@ -1,0 +1,13 @@
+body {
+  background-color: #239346;
+}
+
+h1, .logo a{
+  font-family: 'Leckerli One', sans-serif;
+  color: whitesmoke;
+}
+
+.logo a:hover,
+.logo a:active {
+  text-decoration: none;
+}

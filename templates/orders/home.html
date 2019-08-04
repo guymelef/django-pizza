@@ -1,0 +1,231 @@
+    {% extends 'base.html' %}
+    {% load static %}
+
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    {% endblock %}
+
+    {% block script %}
+    <script src="https://kit.fontawesome.com/f3ec200c17.js"></script>
+    <script type="text/javascript" src="{% static 'js/handlebars-v4.1.2.js' %}"></script>
+    <script src="{% static 'js/menu.js' %}"></script>
+    {% endblock %}
+
+
+    {% block body_content %}
+    <div class="container">
+      <h1 class="mt-4 mb-4 text-white font-weight-bold" id="menu"><a href="#menu" class="text-decoration-none text-reset">Menu:</a></h1>
+        <div class="row">
+          <div class="col-8">
+            <div class="accordion border-0 shadow-sm" id="accordionMenu">
+                <div class="card">
+                  <div class="card-header" id="pizza">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Pizza
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="pizza">
+                    <div class="card-body">
+                      <ul>
+                        {% for pizza in pizzaType %}
+                        <li class="list-group-item mb-1 rounded-0 shadow-sm menu-items" data-type="{{ pizza.alias }}" data-menuname="{{ pizza.name }}" data-toggle="modal" data-target="#menuModal">
+                          <div class="d-flex justify-content-between"> 
+                            <span class="font-weight-bold">{{ pizza.name }}</span>
+                            {% if pizza.name == "Regular Pizza" %}
+                              <mark><small>${{ regularPizza.0.small }}<span>&uarr;</small></mark>
+                            {% else %}
+                              <mark><small>${{ sicilianPizza.0.small }}&uarr;</small></mark>
+                            {% endif %}
+                          </div>
+                          <small>{{ pizza.description }}</small>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="sub">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Subs
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse show" aria-labelledby="sub">
+                    <div class="card-body">
+                      <ul>
+                        {% for sub in subs %}
+                          <li class="list-group-item mb-1 rounded-0 shadow-sm menu-items" data-type="sub" data-menuname="{{ sub.name }}" data-toggle="modal" data-target="#menuModal">
+                            <div class="d-flex justify-content-between">
+                              <span class="font-weight-bold">{{ sub.name }}</span>
+                              {% if sub.small %}
+                                <mark><small>${{ sub.small }}&uarr;</small></mark>
+                              {% else %}
+                                <mark><small>${{ sub.large }}</small></mark>
+                              {% endif %}
+                            </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="pasta">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        Pasta
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="collapse show" aria-labelledby="pasta">
+                    <div class="card-body">
+                      <ul>
+                        {% for pasta in pasta %}
+                          <li class="list-group-item mb-1 rounded-0 shadow-sm menu-items" data-type="pasta" data-menuname="{{ pasta.name }}" data-toggle="modal" data-target="#menuModal">
+                            <div class="d-flex justify-content-between">
+                              <span class="font-weight-bold">{{ pasta.name }}</span>
+                              <mark><small>${{ pasta.price }}</small></mark>
+                            </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="salad">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        Salads
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseFour" class="collapse show" aria-labelledby="salad">
+                    <div class="card-body">
+                      <ul>
+                        {% for salad in salad %}
+                          <li class="list-group-item mb-1 rounded-0 shadow-sm menu-items" data-type="salad" data-menuname="{{ salad.name }}" data-toggle="modal" data-target="#menuModal">
+                            <div class="d-flex justify-content-between">
+                              <span class="font-weight-bold">{{ salad.name }}</span>
+                              <mark><small>${{ salad.price }}</small></mark>
+                            </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                  <div class="card">
+                    <div class="card-header" id="dinnerplatter">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                            Dinner Platters
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapseFive" class="collapse show" aria-labelledby="dinner-platter">
+                      <div class="card-body">
+                        <ul>
+                          {% for dinnerPlatter in dinnerPlatter %}
+                            <li class="list-group-item mb-1 rounded-0 shadow-sm menu-items" data-type="dinnerPlatter" data-menuname="{{ dinnerPlatter.name }}" data-toggle="modal" data-target="#menuModal">
+                              <div class="d-flex justify-content-between">
+                                <span class="font-weight-bold">{{ dinnerPlatter.name }}</span>
+                                <mark><small>${{ dinnerPlatter.small }}&uarr;</small></mark>
+                              </div>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="container">
+              <div class="card bg-dark border border-dark rounded-0 shadow-sm mb-3 rounded-0">
+                <div class="card-header border-success text-white text-center pb-0">
+                  <h6 class="font-weight-bold" id="cart-header">
+                    {% if cart_items %}
+                      <i class="fas fa-2x fa-cart-arrow-down text-success"></i>
+                      <br>
+                      Ooh, smells delicious in here!
+                    </h6>
+                    {% else %}
+                      Your cart looks desolate.
+                      <br>
+                      Where's the food? :(
+                    {% endif %}
+                </div>
+                <div class="card-body text-white pl-0 pr-0 pb-0 pt-1">
+                  <table class="table table-sm text-white table-borderless table-striped">
+                    <tbody id="cartItems">
+                      {% if cart_items %}
+                        {% for item in cart_items %}
+                        <tr data-orderid="{{item.order_id}}">
+                          <th scope="row">{{ item.quantity }}</th>
+                          <td>
+                            {{ item.name}}
+                            {% if item.size %}
+                              <span class="badge badge-secondary p-1 rounded-0">{{ item.size }}</span>
+                            {% endif %}
+                            {% if item.extras %}
+                              <br>
+                              <small><strong>with</strong> {{ item.extras }}</small>
+                            {% endif %}
+                          </td>
+                          <td>
+                            <i class="far fa-trash-alt text-danger text-center" title="Delete order?" onclick="deleteOrder(this)"></i>
+                          </td>
+                          <td class="font-weight-bold text-success text-right">
+                            ${{ item.total }}
+                          </td>
+                        </tr>
+                        {% endfor%}
+                      {% else %}
+                        <div class="text-center" id="zero-cart">
+                          <i class="fas fa-shopping-cart fa-2x mt-4 text-secondary"></i>
+                          <br>
+                          <small class="font-weight-bold text-white">
+                            Your order goes here.
+                          </small>
+                        </div>
+                      {% endif %}
+                    </tbody>
+                  </table>
+                </div>
+                <div id="checkout-div" class="card-footer bg-transparent border-success text-right pr-1">
+                  <button type="button" class="btn btn-success font-weight-bold" id="checkout-btn" {%if cart_items%}{%else%}disabled{%endif%}>
+                    CHECKOUT <span id="cart-total">{%if cart_total%}: <mark>${{cart_total}}</mark>{%endif%}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title font-weight-bold" id="menuModalLabel">Menu Options</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="dynamicModalBody">
+                <!-- modal form -->
+              </div>
+              <div class="modal-footer">
+                <button type="submit" form="menuModalForm" id="addToOrder" class="btn btn-lg btn-cart text-white font-weight-bold"><i class="fas fa-cart-plus fa-lg"></i> Add to Cart <span id="orderTotal"></span></button>
+              </div>
+            </div>  
+          </div>
+        </div>
+    </div>
+    {% include 'includes/dynamicModal.html' %}
+    {% endblock %}

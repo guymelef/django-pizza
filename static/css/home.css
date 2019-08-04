@@ -1,0 +1,67 @@
+button[data-toggle="collapse"], button[data-toggle="collapse"]:hover {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #239346; /* rgb(0,146,70) */
+}
+
+h1 {
+  font-family: 'Leckerli One', sans-serif;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+h3 {
+  font-family: 'Leckerli One', sans-serif;
+}
+
+ul {
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+}
+
+li {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+  
+.menu-items:hover {
+  background-color: rgba(35, 147, 70, 0.8);
+  cursor: pointer;
+}
+
+mark {
+  background-color: #FFCD4A;
+}
+
+input[type=number], input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+    margin: 0;
+    width: 6%;
+}
+
+.btn-ctrl {
+  background: rgba(190, 0, 39, 0.8);
+}
+
+.btn-cart {
+  background: #009246;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: rgba(190, 0, 39, 0.8);
+  background-color: rgba(190, 0, 39, 0.8);
+}
+
+td>div>label:hover {
+  color: rgba(190, 0, 39, 0.8);
+}
+
+.w-55 {
+  width: 55%;
+}
