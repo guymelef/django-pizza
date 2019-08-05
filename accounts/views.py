@@ -6,7 +6,9 @@ from .forms import SignUpForm
 # Create your views here.
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        userData = (request.POST).copy()
+        userData['username'] = userData['username'].lower()
+        form = SignUpForm(userData)
         if form.is_valid():
             user = form.save()
             login(request, user)
