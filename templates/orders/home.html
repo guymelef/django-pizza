@@ -160,8 +160,8 @@
                       Where's the food? ಥ_ಥ
                     {% endif %}
                 </div>
-                <div class="card-body text-white pl-0 pr-0 pb-0 pt-1 overflow-auto" id="cart-items-div">
-                  <table class="table table-sm text-white table-borderless table-striped">
+                <div class="card-body text-white pl-0 pr-0 pb-0 pt-1" id="cart-items-div">
+                  <table class="table table-sm text-white table-borderless">
                     <tbody id="cartItems">
                       {% if cart_items %}
                         {% for item in cart_items %}
@@ -180,8 +180,8 @@
                           <td>
                             <i class="far fa-trash-alt text-danger text-center" title="Delete order?" onclick="deleteOrder(this)"></i>
                           </td>
-                          <td class="font-weight-bold text-success text-right">
-                            ${{ item.total }}
+                          <td class="text-right">
+                            <span class="font-weight-bolder text-success">$</span><span class="text-success"><u>{{ item.total }}</u></span>
                           </td>
                         </tr>
                         {% endfor%}
@@ -189,9 +189,15 @@
                         <div class="text-center" id="zero-cart">
                           <i class="fas fa-shopping-cart fa-3x mt-4 text-secondary"></i>
                           <br>
-                          <small class="font-weight-bold text-white">
-                            Add your orders here!
-                          </small>
+                          {% if user.is_authenticated %}
+                            <small class="font-weight-bold text-white">
+                              Start adding food here!
+                            </small>
+                          {% else %}
+                            <small class="font-weight-bold text-white">
+                              Log in to add food to your cart.
+                            </small>
+                          {% endif %}
                         </div>
                       {% endif %}
                     </tbody>

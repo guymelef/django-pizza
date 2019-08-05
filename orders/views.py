@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse, JsonResponse, Http404
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 
@@ -42,6 +43,7 @@ def home(request):
 
     return render(request, "orders/home.html", context)
 
+@login_required
 def addorder(request):
     if request.is_ajax():
 
@@ -219,6 +221,7 @@ def addorder(request):
     else:
         raise Http404
 
+@login_required
 def deleteorder(request):
     if request.is_ajax():
         order_id = int(request.POST.get('order_id'))

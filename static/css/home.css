@@ -38,9 +38,9 @@ li {
 }
 
 @keyframes bounce { 
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-  40% {transform: translateY(-12px);} 
-  60% {transform: translateY(-6px);} 
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0); color: rgba(84, 211, 11, 0.87);} 
+  40% {transform: translateY(-12px); color: rgba(84, 211, 11, 0.87);} 
+  60% {transform: translateY(-6px); color: rgba(84, 211, 11, 0.87);} 
 }
 
 .fa-cart-arrow-down {
@@ -52,14 +52,14 @@ li {
   0% {font-size: 3em;}
   20% {font-size: 2.5em;}
   40% {font-size: 2.0em;}
-  60% {font-size: 2.0em;}
-  80% {font-size: 2.5em;}
+  60% {font-size: 2.1em;}
+  80% {font-size: 2.6em;}
   100% {font-size: 3em;}
 }
 
 .fa-shopping-cart {
   animation-name: contract;
-  animation-duration: 1.2s;
+  animation-duration: .7s;
 }
 
 mark {
@@ -101,20 +101,20 @@ td>div>label:hover {
 }
 
 #cart-items-div {
+  overflow:auto;
   max-width: 336px; 
   max-height:368px;
   min-height: 200px;
 }
 
-#cart-items-div::-webkit-scrollbar {
-  width: 5px;
+tr:nth-child(even) {
+  background-color: #f2f2f207;
 }
-#cart-items-div::-webkit-scrollbar-track {
-  background: hsla(0, 0%, 95%, 0);
+
+#cart-items-div::-webkit-scrollbar {
+  width: 2px;
 }
 #cart-items-div::-webkit-scrollbar-thumb {
-  background: rgba(0, 161, 21, 0.452);
-}
-#cart-items-div::-webkit-scrollbar-thumb:hover {
-  background: rgba(1, 146, 20, 0.795); 
+  background: rgba(248, 23, 23, 0.637);
+  border-radius: 20px;
 }
