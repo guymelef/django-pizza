@@ -148,63 +148,59 @@
             <div class="container position-fixed" style="max-width: 23rem;">
               <div class="card border border-dark rounded-0 shadow-sm mb-3 rounded-0" id="cart-items-card">
                 <div class="card-header border-success text-white text-center pb-0">
-                  <h6 class="font-weight-bold" id="cart-header">
+                  <h4 class="font-weight-bold" id="cart-header">
                     {% if cart_items %}
                       <i class="fas fa-2x fa-cart-arrow-down text-success"></i>
                       <br>
-                      Ooh, smells delicious in here!
-                    </h6>
+                      Smells delicious in here!
                     {% else %}
-                      This space looks desolate.
-                      <br>
-                      Where's the food? ಥ_ಥ
+                      Where's the food? <br> ಥ_ಥ
                     {% endif %}
+                  </h4>                  
                 </div>
                 <div class="card-body text-white pl-0 pr-0 pb-0 pt-1" id="cart-items-div">
                   <table class="table table-sm text-white table-borderless">
                     <tbody id="cartItems">
                       {% if cart_items %}
                         {% for item in cart_items %}
-                        <tr data-orderid="{{item.order_id}}">
+                        <tr data-orderid="{{item.id}}">
                           <th scope="row">{{ item.quantity }}</th>
                           <td>
                             {{ item.name}}
                             {% if item.size %}
                               <span class="badge badge-secondary rounded-0">{{ item.size }}</span>
                             {% endif %}
-                            {% if item.extras %}
+                            {% if item.addons %}
                               <br>
-                              <small><strong>with</strong> {{ item.extras }}</small>
+                              <small><strong>with</strong> {{ item.addons }}</small>
                             {% endif %}
                           </td>
                           <td>
                             <i class="far fa-trash-alt text-danger text-center" title="Delete order?" onclick="deleteOrder(this)"></i>
                           </td>
                           <td class="text-right">
-                            <span class="font-weight-bolder text-success">$</span><span class="text-success"><u>{{ item.total }}</u></span>
+                            <span class="font-weight-bolder text-success">$</span><span class="text-success"><span class="border-bottom border-white">{{item.sub_total}}</span></span>
                           </td>
                         </tr>
                         {% endfor%}
                       {% else %}
-                        <div class="text-center" id="zero-cart">
-                          <i class="fas fa-shopping-cart fa-3x mt-4 text-secondary"></i>
+                        <div class="text-center pt-4" id="zero-cart">
+                          <i class="fas fa-shopping-cart fa-3x mt-5 text-secondary"></i>
                           <br>
-                          {% if user.is_authenticated %}
-                            <small class="font-weight-bold text-white">
-                              Start adding food here!
-                            </small>
-                          {% else %}
-                            <small class="font-weight-bold text-white">
+                          <h6 class="font-weight-bold text-white">
+                            {% if user.is_authenticated %}  
+                              Start adding orders here!
+                            {% else %}
                               Log in to add food to your cart.
-                            </small>
-                          {% endif %}
+                            {% endif %}
+                          </h6>
                         </div>
                       {% endif %}
                     </tbody>
                   </table>
                 </div>
                 <div id="checkout-div" class="card-footer bg-transparent border-success text-right pr-1">
-                  <button type="button" class="btn btn-success font-weight-bold" id="checkout-btn" {%if cart_items%}{%else%}disabled{%endif%}>
+                  <button type="button" class="btn btn-lg btn-success font-weight-bold" id="checkout-btn" {%if cart_items%}{%else%}disabled{%endif%}>
                     CHECKOUT <span id="cart-total">{%if cart_total%}: <mark>${{cart_total}}</mark>{%endif%}</span>
                   </button>
                 </div>
@@ -227,7 +223,14 @@
                 <!-- modal form -->
               </div>
               <div class="modal-footer">
-                <button type="submit" form="menuModalForm" id="addToOrder" class="btn btn-lg btn-cart text-white font-weight-bold"><i class="fas fa-cart-plus fa-lg"></i> Add to Cart <span id="orderTotal"></span></button>
+                <button type="submit" form="menuModalForm" id="addToOrder" class="btn btn-lg btn-cart text-white font-weight-bold">
+                  <i class="fas fa-cart-plus fa-lg"></i> Add to Cart 
+                  <span id="orderTotal"></span>
+                  {% if not user.is_authenticated %}
+                    <hr class="p-0 mt-2 mb-0">
+                    <small class="p-0 m-0">Must be logged in.</small>
+                  {% endif %}
+                </button>
               </div>
             </div>  
           </div>

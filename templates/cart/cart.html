@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block script %}
+<script src="https://kit.fontawesome.com/f3ec200c17.js"></script>
+{% endblock %}
+
+{% block body_content %}
+<div class="container mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb rounded-pill">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Menu</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+    </ol>
+  </nav>
+
+  <div class="row mt-5">
+    <div class="col-8 rounded">
+      <table class="table table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" class="text-uppercase text-center">Quantity</th>
+            <th scope="col" class="text-uppercase text-center">Menu Item</th>
+            <th scope="col" class="text-uppercase text-center">Price</th>
+            <th scope="col" class="text-uppercase text-center">Subtotal</th>
+            <th scope="col" class="text-uppercase text-center">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart_items %}
+          <tr data-orderid="{{item.id}}">
+            <th scope="row" class="text-center">{{item.quantity}}</th>
+            <td>
+              {{item.name}}
+              {% if item.size %}
+                <span class="badge badge-secondary rounded-0">{{item.size}}</span>
+              {% endif %}
+              {% if item.addons %}
+                <br>
+                <small><strong>with</strong> {{item.addons}}</small>
+              {% endif %}
+            </td>
+            <td class="text-center">${{item.price}}</td>
+            <td class="text-center">$<span class="font-weight-bold">{{item.sub_total}}</span></td>
+            <td class="text-center"><i class="far fa-trash-alt text-danger" title="Remove order?" onclick="deleteOrder(this)"></i></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <div class="card border-success mb-3 rounded-0">
+        <div class="card-header bg-transparent border-success">Header</div>
+        <div class="card-body text-success">
+          <h5 class="card-title">Success card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <div class="card-footer bg-transparent border-success">Footer</div>
+      </div>
+    </div>
+  </div>
+  
+
+
+</div>
+
+
+{% endblock %}

@@ -28,9 +28,9 @@
                   Hi, <span class="font-weight-bold">{{ user.first_name|title }}</span>!
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-                  <a class="dropdown-item" href="#">My Account</a>
+                  <a class="dropdown-item" href="{% url 'cart' %}"><i class="fas fa-tags"></i> Checkout</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                 </div>
               </li>
             </ul>
@@ -39,7 +39,7 @@
               <a href="{% url 'login' %}" class="font-weight-bold text-white">Log In</strong></a>
               <span class="font-weight-bold text-dark">&nbsp;/&nbsp;</span>
               <a href="{% url 'signup' %}" class="font-weight-bold text-white">Sign Up</a>
-              <i class="fas fa-pizza-slice text-white ml-2"></i>
+              <i class="fas fa-pizza-slice ml-2"></i>
             </form>
           {% endif %}
         </div>

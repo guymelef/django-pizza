@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const menuType = this.dataset.type;
       let data = {'menuType': menuType, 'menuName': menuName};
 
-      if (["regularPizza", "sicilianPizza"].includes(menuType)) {
+      if (["RegularPizza", "SicilianPizza"].includes(menuType)) {
         const items = JSON.parse(document.querySelector(`#${menuType}-items`).textContent);
         const toppings = JSON.parse(document.querySelector('#pizzaTopping-items').textContent);
         data.pizza = items;
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const formName = document.querySelector('#menuModalForm').name;
-    if (['regularPizza', 'sicilianPizza'].includes(formName)) {
+    if (['RegularPizza', 'SicilianPizza'].includes(formName)) {
       const basePrice = JSON.parse(document.querySelector(`#${formName}-items`).textContent);
       itemPrice = parseFloat(basePrice[0].small).toFixed(2);
       let toppingsDiv = document.querySelector('#menuAddons');
@@ -162,32 +162,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create AJAX request when submitting form
     document.querySelector('#menuModalForm').onsubmit = () => {
       let data = getFormData();
+      var csrftoken = getCookie('csrftoken');
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
       $.ajax({
         url: 'cart/addorder/',
-        type: 'GET',
+        type: 'POST',
         data: data,
         dataType: 'json',
         success: function (data) {
           let zeroCartDiv = document.querySelector('#zero-cart');
+          if (zeroCartDiv) {
+            zeroCartDiv.style.display = "none";
+          }
           let cartItemsDiv = document.querySelector('#cart-items-div');
           if (data.error) {
-            alert("Please refresh the page and fix your order.");
+            alert(data.error);
           } else {
-            if (zeroCartDiv) {
-              zeroCartDiv.style.display = "none";
-            }
-            document.querySelector('#checkout-btn').disabled = false;
-            document.querySelector('#cart-header').innerHTML = "<i class='fas fa-2x fa-cart-arrow-down text-success'></i><br>Ooh, smells delicious in here!";
-
             const template = Handlebars.compile(document.querySelector('#cart_item').innerHTML);
             const content = template(data);
             document.querySelector('#cartItems').innerHTML += content;
             
+            document.querySelector('#checkout-btn').disabled = false;
+            document.querySelector('#cart-header').innerHTML = "<i class='fas fa-2x fa-cart-arrow-down text-success'></i><br>Smells delicious in here!";
             document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
             $('#menuModal').modal('hide');
             document.querySelector('.fa-cart-arrow-down').style.animationPlayState = 'running';
             scrollToBottom(cartItemsDiv);
-            
           }
         }
       });
@@ -300,8 +306,8 @@ function scrollToBottom(div) {
 
 function cleanupCart() {
   document.querySelector('#cart-total').innerHTML = "";
-  document.querySelector('#cart-header').innerHTML = "This space looks desolate. <br> Where's the food? ಥ_ಥ";
-  document.querySelector('#cartItems').innerHTML = '<div class="text-center" id="zero-cart"><i class="fas fa-shopping-cart fa-3x mt-4 text-secondary"></i> <br> <small class="font-weight-bold text-white">Add your orders here!</small></div>';
+  document.querySelector('#cart-header').innerHTML = "Where's the food? <br> ಥ_ಥ";
+  document.querySelector('#cartItems').innerHTML = '<div class="text-center pt-4" id="zero-cart"><i class="fas fa-shopping-cart fa-3x mt-5 text-secondary"></i><br><h6 class="font-weight-bold text-white">Start adding orders here!</h6></div>';
   document.querySelector('#checkout-btn').disabled = true;
   document.querySelector('.fa-shopping-cart').style.animationPlayState = 'running';
 }
@@ -325,7 +331,7 @@ function deleteOrder(order) {
     dataType: 'json',
     success: function (data) {
       if (data.error) {
-        alert("Please refresh the page and fix your order.");
+        alert(data.error);
       } else {
         order.parentElement.parentElement.style.display = "none";
         document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
@@ -357,12 +363,3 @@ function csrfSafeMethod(method) {
   // these HTTP methods do not require CSRF protection
   return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
-
-
-// Handlebars.registerHelper("isPizza", function(menuType, options) { 
-//   if (["regularPizza", "sicilianPizza"].includes(menuType)) {
-//     return options.fn(this);
-//   } else {
-//     return options.inverse(this);
-//   }
-// })

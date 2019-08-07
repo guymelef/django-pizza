@@ -1,5 +1,5 @@
-{{regularPizza|json_script:"regularPizza-items"}}
-{{sicilianPizza|json_script:"sicilianPizza-items"}}
+{{regularPizza|json_script:"RegularPizza-items"}}
+{{sicilianPizza|json_script:"SicilianPizza-items"}}
 {{pizzaTopping|json_script:"pizzaTopping-items"}}
 {{sub|json_script:"sub-items"}}
 {{pasta|json_script:"pasta-items"}}
@@ -202,16 +202,16 @@
           {{#if size}}
             <span class="badge badge-secondary rounded-0">{{size}}</span>
           {{/if}}
-          {{#if extras}}
+          {{#if addons}}
             <br>
-            <small><strong>with</strong> {{extras}}</small>
+            <small><strong>with</strong> {{addons}}</small>
           {{/if}}
         </td>
         <td>
-          <i class="far fa-trash-alt text-danger text-center" title="Delete order?" onclick="deleteOrder(this)"></i>
+          <i class="far fa-trash-alt text-danger text-center" title="Remove order?" onclick="deleteOrder(this)"></i>
         </td>
         <td class="text-right">
-          <span class="font-weight-bolder text-success">$</span><span class="text-success"><u>{{total}}</u></span>
+          <span class="font-weight-bolder text-success">$</span><span class="text-success"><span class="border-bottom border-white">{{sub_total}}</span></span>
         </td>
       </tr>
       {% endverbatim %}

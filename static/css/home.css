@@ -37,6 +37,21 @@ li {
   cursor: pointer;
 }
 
+@keyframes colorize {
+  0%   {color: white;}
+  30%  {color: yellow;}
+  60%  {color: green;}
+  90% {color: red;}
+}
+
+.fa-pizza-slice {
+  color: white;
+  animation-name: colorize;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+}
+
+
 @keyframes bounce { 
   0%, 20%, 50%, 80%, 100% {transform: translateY(0); color: rgba(84, 211, 11, 0.87);} 
   40% {transform: translateY(-12px); color: rgba(84, 211, 11, 0.87);} 
@@ -103,8 +118,8 @@ td>div>label:hover {
 #cart-items-div {
   overflow:auto;
   max-width: 336px; 
-  max-height:368px;
-  min-height: 200px;
+  max-height:360px;
+  min-height: 225px;
 }
 
 tr:nth-child(even) {

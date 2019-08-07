@@ -12,7 +12,6 @@ class SubExtraAdmin(admin.ModelAdmin):
 class SubAdmin(admin.ModelAdmin):
     filter_horizontal = ("add_Ons",)
 
-
 admin.site.register(PizzaType)
 admin.site.register(RegularPizza)
 admin.site.register(SicilianPizza)
