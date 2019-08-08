@@ -108,16 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('input[name="size"]').forEach((pizzaSize) => {
         pizzaSize.oninput = function () {
           itemPrice = parseFloat(this.dataset.price).toFixed(2);
+          toppingsCount = parseInt(this.dataset.toppings);
 
-          const pizzaName = this.dataset.name.toLowerCase();
-          if (pizzaName.search("one") >= 0) {
-            showToppings(toppingsDiv, 1);
-            updateOrderTotal(orderTotal, orderQty.value, itemPrice);
-          } else if (pizzaName.search("two") >= 0) {
-            showToppings(toppingsDiv, 2);
-            updateOrderTotal(orderTotal, orderQty.value, itemPrice);
-          } else if (pizzaName.search("three") >= 0) {
-            showToppings(toppingsDiv, 3);
+          if (toppingsCount > 0) {
+            showToppings(toppingsDiv, toppingsCount);
             updateOrderTotal(orderTotal, orderQty.value, itemPrice);
           } else {
             document.querySelectorAll('input[name="toppings"]').forEach(topping => {
@@ -209,18 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // **************** //
 function showToppings(toppingsDiv, limit) {
   document.querySelector('#addToOrder').disabled = true;
+  const toppingsHeadline = document.querySelector('#menuAddons>h5>u');
+  const numString = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
-  let toppingsHeadline = document.querySelector('#menuAddons>h5>u');
-  switch (limit) {
-    case 1:
-      toppingsHeadline.innerHTML = "Choose <span class='text-success'>one</span> topping";
-      break;
-    case 2:
-      toppingsHeadline.innerHTML = "Choose <span class='text-success'>two</span> toppings";
-      break;
-    case 3:
-      toppingsHeadline.innerHTML = "Choose <span class='text-success'>three</span> toppings";
-      break;
+  if (limit === 1) {
+    toppingsHeadline.innerHTML = "Choose <span class='text-success'>one</span> topping";
+  } else {
+    toppingsHeadline.innerHTML = `Choose <span class='text-success'>${numString[limit]}</span> toppings`;
   }
 
   toppingsDiv.style.display = "block";
@@ -304,12 +293,8 @@ function scrollToBottom(div) {
   div.scrollTop = div.scrollHeight;
 };
 
-function cleanupCart() {
-  document.querySelector('#cart-total').innerHTML = "";
-  document.querySelector('#cart-header').innerHTML = "Where's the food? <br> ಥ_ಥ";
-  document.querySelector('#cartItems').innerHTML = '<div class="text-center pt-4" id="zero-cart"><i class="fas fa-shopping-cart fa-3x mt-5 text-secondary"></i><br><h6 class="font-weight-bold text-white">Start adding orders here!</h6></div>';
-  document.querySelector('#checkout-btn').disabled = true;
-  document.querySelector('.fa-shopping-cart').style.animationPlayState = 'running';
+function cartPageRedirect() {
+  window.location = "http://127.0.0.1:8000/cart/";
 }
 
 function deleteOrder(order) {
@@ -333,10 +318,11 @@ function deleteOrder(order) {
       if (data.error) {
         alert(data.error);
       } else {
-        order.parentElement.parentElement.style.display = "none";
-        document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
         if (data.cart_total == 0) {
-          cleanupCart();
+          location.reload();
+        } else {
+          order.parentElement.parentElement.style.display = "none";
+          document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
         }
       }
     }

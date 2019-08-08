@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pinocchio's | Payment complete!</title>
+
+  <style>
+    body {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .row {
+      display: grid;
+      justify-content: center;
+      grid-gap: 0px 0px;
+      grid-template-columns: 20% 20%;
+      margin-top: 40px;
+    }
+    .column {
+      text-align: center;
+    }
+    .column-2 {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    #amount {
+      color: rgb(0, 158, 13); 
+    }
+
+    @media screen and (max-width: 1024px) {
+      .row {
+        display: block;
+      }
+      img {
+        height: 400%;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  
+  <div class="row">
+    <div class="column column-1">
+      <img src="../../static/img/pinocchio.png" alt="Pinocchio's Pizza & Subs">
+    </div>
+    <div class="column column-2">
+        <h2>Merci beaucoup! </h2>
+        Your card payment of <br>
+        <strong id="amount">${{cart_total}}</strong>
+        <br> was successful!
+        <br>
+        <h3><a href="{% url 'home' %}">Eat more pizza!</a></h3>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,5 +1,8 @@
+import stripe
+
+from django.conf import settings
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse, Http404
+from django.http import JsonResponse, Http404
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
@@ -7,20 +10,51 @@ from .models import CartItem
 from orders.models import RegularPizza, SicilianPizza, PizzaTopping, Sub, SubExtra, Pasta, Salad, DinnerPlatter
 
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 # Create your views here.
 @login_required
 def cart(request):
     user = request.user.id
     cart_items = CartItem.objects.filter(user=user, status='CART')
     context = {
-        'cart_items': cart_items
+        'cart_items': cart_items,
+        'key': settings.STRIPE_PUBLISHABLE_KEY,
     }
-
+    cart_total = 0
+    cart_quantity = 0
+    for item in cart_items:
+        cart_total += item.sub_total
+        cart_quantity += item.quantity
+    if cart_total != 0:
+        context['cart_total'] = format(cart_total, '.2f')
+        context['stripe_total'] = str(cart_total).replace('.',"")
+        context['cart_quantity'] = cart_quantity
     return render(request, 'cart/cart.html', context)
 
 @login_required
 def checkout(request):
-    return HttpResponse('Check out orders here.')
+    if request.method == 'POST':
+        user = request.user.id
+        cart_items = CartItem.objects.filter(user=user, status='CART')
+        
+        cart_total = 0
+        for item in cart_items:
+            cart_total += item.sub_total
+        amount = str(cart_total).replace('.','')
+
+        CartItem.objects.filter(user=user, status='CART').update(status='PEND')
+
+        charge = stripe.Charge.create(
+            amount=amount,
+            currency='usd',
+            description="Pinocchio's Pizza & Subs",
+            source=request.POST['stripeToken']
+        )
+
+        context = {'cart_total': cart_total}
+        return render(request, 'cart/checkout.html', context)
+    raise Http404
 
 @login_required
 def addorder(request):
@@ -214,11 +248,13 @@ def deleteorder(request):
         
         cart_items = CartItem.objects.filter(user=user, status='CART')
         cart_total = 0
+        cart_quantity = 0
         for item in cart_items:
             cart_total += item.sub_total
+            cart_quantity += item.quantity
         cart_total = format(cart_total, '.2f')
 
-        return JsonResponse({'success': True, 'cart_total': cart_total})
+        return JsonResponse({'success': True, 'cart_total': cart_total, 'cart_quantity': cart_quantity})
 
     # if user reaches page by other request method 
     else:

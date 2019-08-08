@@ -7,8 +7,8 @@ class CartItem(models.Model):
         ('CART', 'In Cart'),
         ('PEND', 'Pending'),
         ('CONF', 'Confirmed'),
-        ('DONE', 'Delivered'),
-        ('OK', 'Completed'),
+        ('DLVR', 'Delivered'),
+        ('DONE', 'Completed'),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quantity = models.IntegerField()
@@ -33,3 +33,6 @@ class CartItem(models.Model):
         default='CART',
     )
     added_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order by: {self.user} -- {self.quantity}x {self.name} [{self.added_on}]"

@@ -14,7 +14,7 @@
 
     {% block body_content %}
     <div class="container">
-      <h1 class="mt-4 mb-4 text-white font-weight-bold" id="menu"><a href="#menu" class="text-decoration-none text-reset">Menu:</a></h1>
+      <h1 class="mt-5 mb-4 text-white font-weight-bold" id="menu"><a href="#menu" class="text-decoration-none text-reset text-uppercase border-bottom">Menu:</a></h1>
         <div class="row">
           <div class="col-8">
             <div class="accordion border-0 shadow-sm" id="accordionMenu">
@@ -200,7 +200,7 @@
                   </table>
                 </div>
                 <div id="checkout-div" class="card-footer bg-transparent border-success text-right pr-1">
-                  <button type="button" class="btn btn-lg btn-success font-weight-bold" id="checkout-btn" {%if cart_items%}{%else%}disabled{%endif%}>
+                  <button type="button" class="btn btn-lg btn-success font-weight-bold" id="checkout-btn" {%if cart_items%}{%else%}disabled{%endif%} onclick="cartPageRedirect()">
                     CHECKOUT <span id="cart-total">{%if cart_total%}: <mark>${{cart_total}}</mark>{%endif%}</span>
                   </button>
                 </div>

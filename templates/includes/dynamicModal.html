@@ -35,7 +35,7 @@
                       <th scope="row" class="text-right border-danger border-bottom">{{this.name}}</th>
                       <td class="text-center border-bottom border-danger">
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="pizzaSmall{{this.id}}" class="custom-control-input" name="size" value="small-{{this.id}}" data-name="{{this.name}}" data-price="{{this.small}}">
+                          <input type="radio" id="pizzaSmall{{this.id}}" class="custom-control-input" name="size" value="small-{{this.id}}" data-name="{{this.name}}" data-price="{{this.small}}" data-toppings="{{this.toppingsCount}}">
                           <label for="pizzaSmall{{this.id}}" class="custom-control-label font-weight-bold font-weight-bold">
                             ${{this.small}}
                           </label>
@@ -43,7 +43,7 @@
                       </td>
                       <td class="text-center border-bottom border-danger">
                         <div class="custom-control custom-radio">
-                          <input type="radio" id="pizzaLarge{{this.id}}" class="custom-control-input" name="size" value="large-{{this.id}}" data-name="{{this.name}}" data-price="{{this.large}}">
+                          <input type="radio" id="pizzaLarge{{this.id}}" class="custom-control-input" name="size" value="large-{{this.id}}" data-name="{{this.name}}" data-price="{{this.large}}" data-toppings="{{this.toppingsCount}}">
                           <label for="pizzaLarge{{this.id}}" class="custom-control-label font-weight-bold font-weight-bold">
                             ${{this.large}}
                           </label>

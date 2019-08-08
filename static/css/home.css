@@ -5,13 +5,7 @@ button[data-toggle="collapse"], button[data-toggle="collapse"]:hover {
   color: #239346; /* rgb(0,146,70) */
 }
 
-h1 {
-  font-family: 'Leckerli One', sans-serif;
-  text-transform: uppercase;
-  text-decoration: underline;
-}
-
-h3 {
+h1, h3 {
   font-family: 'Leckerli One', sans-serif;
 }
 
@@ -118,7 +112,7 @@ td>div>label:hover {
 #cart-items-div {
   overflow:auto;
   max-width: 336px; 
-  max-height:360px;
+  max-height:330px;
   min-height: 225px;
 }
 

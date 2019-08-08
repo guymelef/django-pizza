@@ -1,0 +1,37 @@
+h1, h3 {
+  font-family: 'Leckerli One', sans-serif;
+}
+
+.fa-trash-alt:hover {
+  color: red!important;
+  cursor: pointer;
+}
+
+mark {
+  background-color: #FFCD4A;
+}
+
+#pizza-cat {
+  background-image: url('../img/pizza-cat.jpg');
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 75%;
+  padding: 20px;
+  text-align: center;
+}
