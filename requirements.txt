@@ -1,1 +1,7 @@
-Django
+gunicorn
+Django==2.2.4
+python-decouple==3.1
+django-heroku==0.3.1
+django-widget-tweaks==1.4.3
+pytz==2019.1
+stripe==2.33.2
