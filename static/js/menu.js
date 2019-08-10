@@ -295,7 +295,7 @@ function scrollToBottom(div) {
 };
 
 function cartPageRedirect() {
-  window.location = window.location + 'cart';
+  window.location = 'https://pizza4cs50w.herokuapp.com/cart';
 }
 
 function deleteOrder(order) {
