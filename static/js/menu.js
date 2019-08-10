@@ -1,9 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let modal_form, cart_text = "";
+  (function () {
+    var csrftoken = getCookie('csrftoken');
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+      $.ajax({
+        url: '/',
+        type: 'POST',
+        data: {'data': 'hbtext'},
+        dataType: 'json',
+        success: function (data) { 
+          modal_form = data.modal_form;
+          cart_text = data.cart_text;
+        }
+      })
+  })()
 
   // Modify modal when a menu item is clicked
   document.querySelectorAll('.menu-items').forEach((menu) => {
     menu.onclick = function() {
-      const template = Handlebars.compile(document.querySelector("#modalContent").innerHTML);
+      const template = Handlebars.compile(modal_form);
 
       const menuName = this.dataset.menuname;      
       const menuType = this.dataset.type;
@@ -179,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(data.error);
             window.reload();
           } else {
-            const template = Handlebars.compile(document.querySelector('#cart_item').innerHTML);
+            const template = Handlebars.compile(cart_text);
             const content = template(data);
             document.querySelector('#cartItems').innerHTML += content;
             
@@ -188,7 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
             $('#menuModal').modal('hide');
             document.querySelector('.fa-cart-arrow-down').style.animationPlayState = 'running';
-            document.querySelector('span.cart-quantity').innerHTML = data.cart_quantity;
+            
+            if (document.querySelector('span.cart-quantity').style.display === "none") {
+              document.querySelector('span.cart-quantity').innerHTML = data.cart_quantity;
+              document.querySelector('span.cart-quantity').style.display = "";
+            } else {
+              document.querySelector('span.cart-quantity').innerHTML = data.cart_quantity;
+            }
             scrollToBottom(cartItemsDiv);
           }
         }
@@ -295,7 +322,7 @@ function scrollToBottom(div) {
 };
 
 function cartPageRedirect() {
-  window.location = 'https://pizza4cs50w.herokuapp.com/cart';
+  window.location = 'http://127.0.0.1:8000/cart/';
 }
 
 function deleteOrder(order) {

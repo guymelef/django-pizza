@@ -199,7 +199,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div id="checkout-div" class="card-footer bg-transparent border-success text-right pr-1">
+                <div id="checkout-div" class="card-footer bg-transparent border-success text-right pr-2">
                   <button type="button" class="btn btn-lg btn-success font-weight-bold" id="checkout-btn" {%if cart_items%}{%else%}disabled{%endif%} onclick="cartPageRedirect()">
                     CHECKOUT <span id="cart-total">{%if cart_total%}: <mark>${{cart_total}}</mark>{%endif%}</span>
                   </button>
@@ -221,6 +221,7 @@
               </div>
               <div class="modal-body" id="dynamicModalBody">
                 <!-- modal form -->
+                {% csrf_token %}
               </div>
               <div class="modal-footer">
                 <button type="submit" form="menuModalForm" id="addToOrder" class="btn btn-lg btn-cart text-white font-weight-bold">
@@ -236,5 +237,5 @@
           </div>
         </div>
     </div>
-    {% include 'includes/dynamicModal.html' %}
     {% endblock %}
+    {% block javascript %}{% include 'includes/menuItems.html' %}{% endblock%}

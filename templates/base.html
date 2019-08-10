@@ -24,7 +24,7 @@
               <li class="nav-item">
                 <a href="{% url 'cart' %}" class="items-in-cart d-inline">
                   <span><i class="fas fa-shopping-cart lg"></i></span>
-                  <span class="cart-quantity">{{cart_quantity}}</span>
+                  <span class="cart-quantity" {%if cart_quantity == 0 %}style="display: none;"{% endif %}>{{cart_quantity}}</span>
                 </a>
               </li>
               <li class="nav-item dropdown">
@@ -43,7 +43,7 @@
               <a href="{% url 'login' %}" class="font-weight-bold text-white">Log In</strong></a>
               <span class="font-weight-bold text-dark">&nbsp;/&nbsp;</span>
               <a href="{% url 'signup' %}" class="font-weight-bold text-white">Sign Up</a>
-              <i class="fas fa-pizza-slice ml-2"></i>
+              <i class="fas fa-lg fa-pizza-slice ml-2"></i>
             </form>
           {% endif %}
         </div>
@@ -53,7 +53,6 @@
 
     {% block body_content %}
     {% endblock %}
-
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

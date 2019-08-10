@@ -1,7 +1,7 @@
 .items-in-cart {
-  color: #239346;
+  color: #20cf2f;
   padding: 4px 1px;
-  margin-right: 13px;
+  margin-right: 9px;
   text-decoration: none;
   top: 4px;
   position: relative;
@@ -36,6 +36,7 @@ button[data-toggle="collapse"], button[data-toggle="collapse"]:hover {
 
 #orderQty {
   width: 40px;
+  margin: 2px;
 }
 
 h1, h3 {
@@ -65,16 +66,16 @@ li {
 }
 
 @keyframes colorize {
-  0%   {color: white;}
-  30%  {color: yellow;}
-  60%  {color: green;}
-  90% {color: red;}
+  0%   {color: honeydew;}
+  30%  {color: gold;}
+  60%  {color: limegreen;}
+  90% {color: tomato;}
 }
 
 .fa-pizza-slice {
   color: white;
   animation-name: colorize;
-  animation-duration: 2.5s;
+  animation-duration: 2.4s;
   animation-iteration-count: infinite;
 }
 
