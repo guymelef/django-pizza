@@ -322,7 +322,7 @@ function scrollToBottom(div) {
 };
 
 function cartPageRedirect() {
-  window.location = 'http://127.0.0.1:8000/cart/';
+  window.location = 'https://pizza4cs50w.herokuapp.com/cart/';
 }
 
 function deleteOrder(order) {
