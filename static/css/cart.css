@@ -11,6 +11,35 @@ mark {
   background-color: #FFCD4A;
 }
 
+.items-in-cart {
+  color: #239346;
+  padding: 4px 1px;
+  margin-right: 13px;
+  text-decoration: none;
+  top: 4px;
+  position: relative;
+  display: inline-block;
+}
+
+#mainMenu > ul > li:nth-child(1) > a > span:nth-child(1) > i {
+  font-size: 1.6em;
+}
+
+.items-in-cart:hover {
+  color: forestgreen;
+}
+
+.cart-quantity {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  padding: 2px 8px;
+  border-radius: 50%;
+  background-color:rgba(253, 31, 31, 0.849);
+  color: white;
+  font-size: 0.7em;
+}
+
 #pizza-cat {
   background-image: url('../img/pizza-cat.jpg');
   filter: blur(3px);
@@ -21,17 +50,17 @@ mark {
 }
 
 .bg-text {
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.4);
   color: white;
   font-weight: bold;
   border: 3px solid #f1f1f1;
   position: absolute;
-  top: 75%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  width: 75%;
-  padding: 20px;
+  width: 65%;
+  padding: 20px 0px;
   text-align: center;
 }

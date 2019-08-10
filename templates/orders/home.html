@@ -13,10 +13,10 @@
 
 
     {% block body_content %}
-    <div class="container">
+    <div class="container mb-3">
       <h1 class="mt-5 mb-4 text-white font-weight-bold" id="menu"><a href="#menu" class="text-decoration-none text-reset text-uppercase border-bottom">Menu:</a></h1>
         <div class="row">
-          <div class="col-8">
+          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" id="menu-div">
             <div class="accordion border-0 shadow-sm" id="accordionMenu">
                 <div class="card">
                   <div class="card-header" id="pizza">
@@ -144,8 +144,8 @@
                   </div>
             </div>
           </div>
-          <div class="col-4">
-            <div class="container position-fixed" style="max-width: 23rem;">
+          <div class="col-lg-4 d-xs-none d-sm-none d-md-block d-l-block d-lg-block side-cart-div">
+            <div class="container position-fixed" id="side-cart">
               <div class="card border border-dark rounded-0 shadow-sm mb-3 rounded-0" id="cart-items-card">
                 <div class="card-header border-success text-white text-center pb-0">
                   <h4 class="font-weight-bold" id="cart-header">
@@ -154,7 +154,7 @@
                       <br>
                       Smells delicious in here!
                     {% else %}
-                      Where's the food? <br> ಥ_ಥ
+                      Where's the food? <br> (╯‵□′)╯︵┻━┻
                     {% endif %}
                   </h4>                  
                 </div>

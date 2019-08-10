@@ -6,13 +6,12 @@ from django.http import JsonResponse, Http404
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import CartItem
+from .models import CartItem, CheckoutItem
 from orders.models import RegularPizza, SicilianPizza, PizzaTopping, Sub, SubExtra, Pasta, Salad, DinnerPlatter
-
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-# Create your views here.
+
 @login_required
 def cart(request):
     user = request.user.id
@@ -29,7 +28,7 @@ def cart(request):
     if cart_total != 0:
         context['cart_total'] = format(cart_total, '.2f')
         context['stripe_total'] = str(cart_total).replace('.',"")
-        context['cart_quantity'] = cart_quantity
+    context['cart_quantity'] = cart_quantity
     return render(request, 'cart/cart.html', context)
 
 @login_required
@@ -43,7 +42,12 @@ def checkout(request):
             cart_total += item.sub_total
         amount = str(cart_total).replace('.','')
 
-        CartItem.objects.filter(user=user, status='CART').update(status='PEND')
+        checkout = CheckoutItem()
+        checkout.user = User.objects.get(pk=user)
+        checkout.grand_total = cart_total
+        checkout.save()
+        checkout.cart_items.add(*cart_items)
+        CartItem.objects.filter(user=user, status='CART').update(status='PAID')
 
         charge = stripe.Charge.create(
             amount=amount,
@@ -218,13 +222,16 @@ def addorder(request):
         cart_item.save()
 
         cart_total = 0
+        cart_quantity = 0
         cart_items = CartItem.objects.filter(
             user = user,
             status = 'CART',
         )
         for item in cart_items:
             cart_total += item.sub_total
+            cart_quantity += item.quantity
         new_order['cart_total'] = format(cart_total, '.2f')
+        new_order['cart_quantity'] = cart_quantity
         new_order['order_id'] = cart_item.id
 
         print(new_order)
@@ -239,7 +246,7 @@ def deleteorder(request):
     if request.is_ajax():
         user = User.objects.get(pk=request.user.id)
         order_id = request.POST.get('order_id')
-        print(order_id)
+
         try:
             item = CartItem.objects.get(pk=order_id, user=user)
             item.delete()

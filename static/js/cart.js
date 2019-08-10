@@ -46,6 +46,7 @@ function deleteOrder(order) {
           order.parentElement.parentElement.style.display = "none";
           document.querySelector('#cart-quantity').innerHTML = data.cart_quantity;
           document.querySelector('#cart-total').innerHTML = `: <mark>$${data.cart_total}</mark>`;
+          document.querySelector('span.cart-quantity').innerHTML = data.cart_quantity;
         }
       }
     }

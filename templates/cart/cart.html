@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}Pinocchio's Pizza & Subs | Cart{% endblock %}
 {% load static %}
     {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
@@ -13,7 +14,7 @@
       <h1 class="mt-5 mb-4 text-white font-weight-bold text-uppercase" id="cart"><a href="#cart" class="text-decoration-none text-reset border-bottom">Cart:</a></h1>
       {% if cart_items %}
       <div class="row">
-        <div class="col-8 rounded">
+        <div class="col-lg-8 rounded">
           <table class="table table-hover table-bordered table-light shadow-sm">
             <thead class="thead-dark">
               <tr class="text-uppercase text-center">
@@ -46,7 +47,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
           <div class="card bg-success text-white border-info mb-3 rounded-0 shadow-sm">
             <div class="card-header bg-transparent border-info text-center">Please review every item in your cart before proceeding with payment.</div>
             <div class="card-body text-white shadow-sm">
@@ -79,11 +80,13 @@
         </div>
       </div>
       {% else %}
-      <div id="pizza-cat" class="pt-5 mb-5 rounded vh-100"></div>
-      <div class="bg-text">
-        <h2>This cat is hungry for some pizza.</h2>
-        <h1 style="font-size:50px">Let's add food to your cart!</h1>
-        <a href="{% url 'home' %}#menu" class="btn btn-lg btn-success font-weight-bold">Back to Menu</a>
+      <div class="mt-5">
+        <div id="pizza-cat" class="container mb-5 rounded vh-100"></div>
+        <div class="bg-text container">
+          <h2>This cat appears when your cart is empty.</h2>
+          <h1 style="font-size:50px">Stop hungry cat sightings.</h1>
+          <a href="{% url 'home' %}#menu" class="btn btn-lg btn-success font-weight-bold">Order Food</a>
+        </div>
       </div>
       {% endif %}
     </div>

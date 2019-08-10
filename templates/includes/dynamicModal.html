@@ -11,9 +11,11 @@
         {% csrf_token %}
         <div id="menuQuantity">
           <h5 class="font-weight-bold"><u>Quantity</u>:</h5>
-          <button type="button" id="minusBtn" class="btn border border-dark rounded-circle font-weight-bold btn-ctrl text-white">&minus;</button>
-          <input id="orderQty" class="quantity border-dark rounded-sm text-center p-1" min="1" name="quantity" value="1" type="number">
-          <button type="button" id="plusBtn"class="btn border border-dark rounded-circle font-weight-bold btn-ctrl text-white">&plus;</button>
+          <div>
+            <button type="button" id="minusBtn" class="btn border border-dark rounded-circle font-weight-bold btn-ctrl text-white">&minus;</button>
+            <input id="orderQty" class="quantity border-dark rounded-sm text-center p-1" min="1" name="quantity" value="1" type="number">
+            <button type="button" id="plusBtn"class="btn border border-dark rounded-circle font-weight-bold btn-ctrl text-white">&plus;</button>
+          </div>
         </div>
         {% verbatim %}
           {{#if pizza}}
@@ -21,38 +23,40 @@
               <h5 class="font-weight-bold mt-4"><u>Select a pizza</u>:</h5>
               <input type="hidden" name="category" value="pizza">
               <input type="hidden" name="type" value="{{menuType}}">
-              <table class="w-55 table table-sm table-hover table-borderless">
-                <thead>
-                  <tr>
-                    <th scope="col" class="text-center"></th>
-                    <th scope="col" class="text-center bg-danger border">SMALL</th>
-                    <th scope="col" class="text-center bg-danger border">LARGE</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each pizza}}
+              <div class="col-lg-6 col-md-10">
+                <table class="table table-sm table-hover table-borderless">
+                  <thead>
                     <tr>
-                      <th scope="row" class="text-right border-danger border-bottom">{{this.name}}</th>
-                      <td class="text-center border-bottom border-danger">
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="pizzaSmall{{this.id}}" class="custom-control-input" name="size" value="small-{{this.id}}" data-name="{{this.name}}" data-price="{{this.small}}" data-toppings="{{this.toppingsCount}}">
-                          <label for="pizzaSmall{{this.id}}" class="custom-control-label font-weight-bold font-weight-bold">
-                            ${{this.small}}
-                          </label>
-                        </div>
-                      </td>
-                      <td class="text-center border-bottom border-danger">
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="pizzaLarge{{this.id}}" class="custom-control-input" name="size" value="large-{{this.id}}" data-name="{{this.name}}" data-price="{{this.large}}" data-toppings="{{this.toppingsCount}}">
-                          <label for="pizzaLarge{{this.id}}" class="custom-control-label font-weight-bold font-weight-bold">
-                            ${{this.large}}
-                          </label>
-                        </div>
-                      </td>
+                      <th scope="col" class="text-center"></th>
+                      <th scope="col" class="text-center bg-danger border">SMALL</th>
+                      <th scope="col" class="text-center bg-danger border">LARGE</th>
                     </tr>
-                  {{/each}}        
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {{#each pizza}}
+                      <tr>
+                        <th scope="row" class="text-right border-danger border-bottom">{{this.name}}</th>
+                        <td class="text-center border-bottom border-danger">
+                          <div class="custom-control custom-radio">
+                            <input type="radio" id="pizzaSmall{{this.id}}" class="custom-control-input" name="size" value="small-{{this.id}}" data-name="{{this.name}}" data-price="{{this.small}}" data-toppings="{{this.toppingsCount}}">
+                            <label for="pizzaSmall{{this.id}}" class="custom-control-label font-weight-bold font-weight-bold">
+                              ${{this.small}}
+                            </label>
+                          </div>
+                        </td>
+                        <td class="text-center border-bottom border-danger">
+                          <div class="custom-control custom-radio">
+                            <input type="radio" id="pizzaLarge{{this.id}}" class="custom-control-input" name="size" value="large-{{this.id}}" data-name="{{this.name}}" data-price="{{this.large}}" data-toppings="{{this.toppingsCount}}">
+                            <label for="pizzaLarge{{this.id}}" class="custom-control-label font-weight-bold font-weight-bold">
+                              ${{this.large}}
+                            </label>
+                          </div>
+                        </td>
+                      </tr>
+                    {{/each}}        
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div id="menuAddons">
               <h5 class="font-weight-bold mt-4"><u>Choose your toppings</u>:</h5>

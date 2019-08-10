@@ -36,9 +36,12 @@ def home(request):
     }
 
     cart_total = 0
+    cart_quantity = 0
     for item in cart_items:
         cart_total += item.sub_total
+        cart_quantity += item.quantity
     if cart_total != 0:
         context['cart_total'] = format(cart_total, '.2f')
+    context['cart_quantity'] = cart_quantity
 
     return render(request, "orders/home.html", context)
