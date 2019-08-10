@@ -234,7 +234,6 @@ def addorder(request):
         new_order['cart_quantity'] = cart_quantity
         new_order['order_id'] = cart_item.id
 
-        print(new_order)
         return JsonResponse(new_order)
     
     # if user reaches page by other request method 
