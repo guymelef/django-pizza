@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <link rel="icon" type="image/png" sizes="48x48" href="../static/img/favicon.ico">
+  <title>Error 404 - Pizza not found!!1</title>
+  <style>
+    body {
+      background: #239346;
+      font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    }
+
+    main {
+      position: relative;
+      height: 500px;
+      width: 60%;
+      margin: 0 auto;
+      resize: both;
+      margin-top: 8%;
+    }
+
+    main div {
+      text-align: center;
+      background: #be0027;
+      color: white;
+      width: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      padding: 20px;
+      resize: both;
+    }
+    h1 {
+      font-size: 3em;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bolder;
+    }
+    a {
+      text-decoration: none;
+      color: lawngreen;
+    }
+    p {
+        font-weight: bold;
+    }
+  </style>
+  <body>
+    <main>
+      <div>
+        <h1>404</h1>
+        <p>That's an error, not a pizza.</p>
+        <h2><a href="{%url 'home'%}"><u>Go Back</u> </a></h2>
+      </div>
+    </main>
+  </body>
+  
+</html>
