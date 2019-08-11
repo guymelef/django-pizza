@@ -161,6 +161,11 @@ tr:nth-child(even) {
   background-color: #f2f2f207;
 }
 
+/* FIREFOX */
+#cart-items-div {
+  scrollbar-width: thin;
+}
+
 #cart-items-div::-webkit-scrollbar {
   width: 2px;
 }
