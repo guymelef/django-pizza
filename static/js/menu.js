@@ -197,8 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           let cartItemsDiv = document.querySelector('#cart-items-div');
           if (data.error) {
-            console.log(data.error);
-            window.reload();
+            location.reload();
           } else {
             const template = Handlebars.compile(cart_text);
             const content = template(data);
@@ -344,8 +343,7 @@ function deleteOrder(order) {
     dataType: 'json',
     success: function (data) {
       if (data.error) {
-        console.log(data.error);
-        window.reload();
+        location.reload();
       } else {
         if (data.cart_total == 0) {
           location.reload();

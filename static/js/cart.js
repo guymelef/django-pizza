@@ -38,7 +38,7 @@ function deleteOrder(order) {
     dataType: 'json',
     success: function (data) {
       if (data.error) {
-        alert(data.error);
+        location.reload();
       } else {
         if (data.cart_total == 0) {
           location.reload();
