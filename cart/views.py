@@ -1,7 +1,7 @@
 import stripe
 
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse, Http404
 from django.contrib.auth.decorators import login_required
 
@@ -76,7 +76,7 @@ def addorder(request):
         # Validate quantity
         try:
             quantity = int(data['quantity'])
-            if quantity <= 0:
+            if quantity <= 0 or quantity > 100:
                 return JsonResponse({'error': 'Please fix your order!'})
         except:
             return JsonResponse({'error': 'Please fix your order!'})

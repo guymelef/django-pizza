@@ -93,8 +93,17 @@ document.addEventListener('DOMContentLoaded', () => {
     orderQty.oninput = function() {
       if ((parseInt(this.value) < 1) || isNaN(parseInt(this.value))) {
         this.value = 1;
+        minusBtn.disabled = true;
       } else {
-        updateOrderTotal(orderTotal, orderQty.value, itemPrice, extra);
+        if (parseInt(this.value) >= 100) {
+          this.value = 100;
+          plusBtn.disabled = true;
+          minusBtn.disabled = false;
+        } else {
+          plusBtn.disabled = false;
+        }
+        this.value = parseInt(this.value);
+        updateOrderTotal(orderTotal, this.value, itemPrice, extra);
       }
     }
 
@@ -103,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.disabled = true;
       } else {
         this.disabled = false;
+        plusBtn.disabled  = false;
         orderQty.stepDown();
         updateOrderTotal(orderTotal, orderQty.value, itemPrice, extra);
         if (parseInt(orderQty.value) === 1) {
@@ -111,12 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    plusBtn.onclick = () => {
+    plusBtn.onclick = function() {
       orderQty.stepUp();
       updateOrderTotal(orderTotal, orderQty.value, itemPrice, extra);
-      if (parseInt(orderQty.value) > 1) {
-        minusBtn.disabled = false;
-      }
+      parseInt(orderQty.value) > 1 ? minusBtn.disabled = false : "";
+      parseInt(orderQty.value) >= 100 ? this.disabled = true : "";
     }
 
     const formName = document.querySelector('#menuModalForm').name;
