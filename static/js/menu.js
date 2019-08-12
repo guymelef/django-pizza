@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let itemPrice;
 
     orderQty.oninput = function() {
-      if ((parseInt(this.value) < 1) || isNaN(parseInt(this.value))) {
+      if ((parseInt(this.value) <= 1) || isNaN(parseInt(this.value))) {
         this.value = 1;
         minusBtn.disabled = true;
       } else {
