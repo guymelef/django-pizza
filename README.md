@@ -12,5 +12,5 @@ This Django project is composed of three apps:
 - **accounts** : To separate user account views
 - **cart** : For updating cart items and processing orders
 
-Admin page is located at `i/am/an/admin`
-As a *personal touch*, **Stripe** API is implemented as a payment option.
+Admin page is located at `i/am/an/admin`.
+As a *personal touch*, **Stripe** API is implemented as a payment option. Admin can also mark orders as paid, complete, etc by loggin into the admin page.
